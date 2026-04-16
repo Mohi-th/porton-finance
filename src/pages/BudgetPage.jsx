@@ -6,7 +6,7 @@ import { formatCurrency } from '../utils/formatters';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { Target, TrendingDown, ShieldCheck, AlertTriangle, Edit3, X, Save, Plus } from 'lucide-react';
-import { DEFAULT_BUDGET_LIMITS, CHART_COLORS } from '../utils/constants';
+import { DEFAULT_BUDGET_LIMITS, CHART_COLORS, ALL_CATEGORIES } from '../utils/constants';
 import './BudgetPage.css';
 
 export default function BudgetPage() {
@@ -21,6 +21,7 @@ export default function BudgetPage() {
   const [editValue, setEditValue] = useState('');
   const [showAddModal, setShowAddModal] = useState(false);
   const [newCategory, setNewCategory] = useState('');
+  const [customCategory, setCustomCategory] = useState('');
   const [newLimit, setNewLimit] = useState('');
 
   const budgetItems = useMemo(() => {
@@ -77,14 +78,17 @@ export default function BudgetPage() {
 
   const handleAddCategory = useCallback(() => {
     const val = parseInt(newLimit, 10);
-    if (newCategory.trim() && !isNaN(val) && val > 0) {
-      setBudgetLimits(prev => ({ ...prev, [newCategory.trim()]: val }));
-      trackEvent('cta_click', { action: 'add_budget', category: newCategory, limit: val });
+    const categoryToUse = newCategory === 'CUSTOM_OTHER' ? customCategory.trim() : newCategory.trim();
+    
+    if (categoryToUse && !isNaN(val) && val > 0) {
+      setBudgetLimits(prev => ({ ...prev, [categoryToUse]: val }));
+      trackEvent('cta_click', { action: 'add_budget', category: categoryToUse, limit: val });
     }
     setShowAddModal(false);
     setNewCategory('');
+    setCustomCategory('');
     setNewLimit('');
-  }, [newCategory, newLimit, setBudgetLimits, trackEvent]);
+  }, [newCategory, customCategory, newLimit, setBudgetLimits, trackEvent]);
 
   const handleDeleteBudget = useCallback((category) => {
     setBudgetLimits(prev => {
@@ -241,13 +245,52 @@ export default function BudgetPage() {
             <h3 style={{ fontSize: '1.125rem', fontWeight: 700, marginBottom: '1.5rem' }}>Add Budget Category</h3>
             <div style={{ marginBottom: '1rem' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Category Name</label>
-              <input type="text" value={newCategory} onChange={e => setNewCategory(e.target.value)} placeholder="e.g. Education" style={inputStyle} autoFocus />
+              <select 
+                value={newCategory} 
+                onChange={e => setNewCategory(e.target.value)} 
+                style={inputStyle} 
+                autoFocus
+              >
+                <option value="">Select Category</option>
+                {ALL_CATEGORIES
+                  .filter(cat => !budgetLimits[cat]) // Only show categories that don't have a budget yet
+                  .map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                <option value="CUSTOM_OTHER">--- Custom Other ---</option>
+              </select>
             </div>
+            {newCategory === 'CUSTOM_OTHER' && (
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Custom Category Name</label>
+                <input 
+                  type="text" 
+                  value={customCategory}
+                  placeholder="e.g. Pet Care" 
+                  style={inputStyle} 
+                  onChange={e => setCustomCategory(e.target.value)}
+                />
+              </div>
+            )}
             <div style={{ marginBottom: '1.5rem' }}>
               <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Monthly Limit (₹)</label>
               <input type="number" value={newLimit} onChange={e => setNewLimit(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleAddCategory()} placeholder="5000" style={inputStyle} min="100" step="500" />
             </div>
-            <button onClick={handleAddCategory} disabled={!newCategory.trim() || !newLimit} className="btn-primary" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem', opacity: (!newCategory.trim() || !newLimit) ? 0.5 : 1 }}>
+            <button 
+              onClick={handleAddCategory} 
+              disabled={(!newCategory.trim() || (newCategory === 'CUSTOM_OTHER' && !customCategory.trim())) || !newLimit} 
+              className="btn-primary" 
+              style={{ 
+                width: '100%', 
+                padding: '0.75rem', 
+                borderRadius: '8px', 
+                border: 'none', 
+                cursor: 'pointer', 
+                fontWeight: 600, 
+                fontSize: '0.875rem', 
+                opacity: ((!newCategory.trim() || (newCategory === 'CUSTOM_OTHER' && !customCategory.trim())) || !newLimit) ? 0.5 : 1 
+              }}
+            >
               Add Category
             </button>
           </div>
