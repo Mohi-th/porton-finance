@@ -13,13 +13,3 @@
   display: flex;
   gap: 1rem;
 }
-
-/* Hide the table-header display:none override on mobile since we want full grid in scroll mode */
-@media (max-width: 690px) {
-  .transactions-page .table-header {
-    display: grid !important;
-  }
-  .transactions-page .desktop-only {
-    display: flex !important;
-  }
-}

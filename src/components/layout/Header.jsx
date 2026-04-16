@@ -87,13 +87,15 @@ export const Header = () => {
   return (
     <>
       <header className="header">
-        <div className="mobile-only" style={{ alignItems: 'center', gap: '0.75rem' }}>
-          <Building className="text-primary" size={24} />
-          <div>
-            <div className="logo-text">Proton Finance</div>
-            <div className="logo-sub">Wealth Curator</div>
-          </div>
-        </div>
+    <div className="mobile-only" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', borderRadius: '8px', border: '1px solid var(--border-color)', backgroundColor: 'transparent' }}>
+        <Building className="text-primary" size={24} />
+      </div>
+      <div>
+        <div className="logo-text" style={{ fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.1 }}>Proton Finance</div>
+        <div className="logo-sub" style={{ fontSize: '0.65rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Wealth Curator</div>
+      </div>
+    </div>
 
         {/* Search Bar with Dropdown */}
         <div className="search-bar desktop-only" ref={searchRef} style={{ position: 'relative' }}>
