@@ -114,13 +114,5 @@ export const api = {
     transactions = transactions.filter(t => t._id !== id);
     saveToStorage(transactions);
     return id;
-  },
-
-  // Dashboard / Budget / etc.
-  getDashboardData: async () => {
-    await delay(300);
-    return {
-      // Add other dashboard-specific mock data if needed
-    };
   }
 };

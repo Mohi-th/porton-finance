@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as transactionService from '../../services/transactionService';
+import { api as transactionService } from '../../services/api';
 
 // ======== Async Thunks ========
 
@@ -10,7 +10,7 @@ export const fetchTransactions = createAsyncThunk(
   'transactions/fetchAll',
   async (_, { rejectWithValue }) => {
     try {
-      const data = await transactionService.getAllTransactions();
+      const data = await transactionService.getTransactions();
       return data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || 'Failed to fetch transactions');
