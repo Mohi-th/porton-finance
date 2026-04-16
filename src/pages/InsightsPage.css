@@ -1,0 +1,22 @@
+.insights-page {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Responsive overrides for insights stat cards */
+@media (max-width: 1024px) {
+  .insights-page .summary-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .insights-page .summary-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .insights-page .insight-alerts-grid {
+    grid-template-columns: 1fr;
+  }
+  .insights-page section > div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}

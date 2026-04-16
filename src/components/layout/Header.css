@@ -1,0 +1,89 @@
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  margin-bottom: 1.5rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-input);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  width: 320px;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+
+.search-bar input {
+  color: var(--text-primary);
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+.header-tabs {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.header-tab {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding-bottom: 0.25rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+/* Underline animation — slides in from center */
+.header-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary, #3B82F6);
+  border-radius: 2px;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.header-tab:hover {
+  color: var(--text-primary);
+}
+
+.header-tab:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+.header-tab.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.header-tab.active::after {
+  width: 100%;
+  left: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 0;
+    gap: 0.75rem;
+  }
+  .header-actions {
+    gap: 0.75rem;
+  }
+}

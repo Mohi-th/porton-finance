@@ -1,0 +1,69 @@
+/* Insight Card */
+.insight-card {
+  background: linear-gradient(135deg, #0A3D91, #1355BD);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  border: none;
+  color: #FFFFFF;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 100px;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--text-primary);
+  color: var(--bg-app);
+}
+
+.btn-primary:hover {
+  background-color: #E5E7EB;
+}
+
+.btn-secondary {
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
+}
+
+/* Insight Card Specific Button Overrides */
+.insight-card .btn-primary {
+  background-color: #FFFFFF;
+  color: #0A3D91;
+}
+
+.insight-card .btn-primary:hover {
+  background-color: #F8F9FA;
+}
+
+.insight-card .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+.insight-card .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}

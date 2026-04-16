@@ -1,0 +1,31 @@
+/* Spending Composition */
+.spending-bar-container {
+  margin-bottom: 1.25rem;
+}
+
+.spending-bar-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.spending-bar-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--bg-input);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.spending-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+}
+
+.note-box {
+  background-color: var(--bg-input);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  margin-top: 1.5rem;
+}
