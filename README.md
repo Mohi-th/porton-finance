@@ -109,7 +109,7 @@ Toggle between roles via the **header segmented control**. The current role is d
 
 ### 3. Component Design
 - **Atomic-ish UI**: Components are split into `common` (reusable primitives), `layout` (app shell), and feature-specific folders (dashboard, transactions).
-- **Glassmorphism & CSS Variables**: Styles are managed through pure CSS with a robust system of custom variables (CSS variables) for consistent design tokens across light and dark modes.
+- **CSS Variables**: Styles are managed through pure CSS with a robust system of custom variables (CSS variables) for consistent design tokens across light and dark modes.
 
 ---
 
@@ -263,7 +263,7 @@ The application uses **React Context API** for theme management instead of Redux
 
 - **`ThemeContext.jsx`**: Provides `theme` and `toggleTheme` to the entire app.
 - **Persistence**: Theme preference (`light`/`dark`) is automatically persisted to `localStorage`.
-- **Implementation**: The `data-theme` attribute is toggled on the `document.documentElement`, which triggers Tailwind's dark mode.
+- **Implementation**: The `data-theme` attribute is toggled on the `document.documentElement`, which allows for consistent styling across components.
 
 ---
 
@@ -291,7 +291,7 @@ Keystroke timeline:
 
 ## 🎨 Design System
 
-The UI is powered by **Tailwind CSS v4** with custom design tokens defined via the `@theme` directive in `index.css`.
+The UI is powered by pure CSS with custom design tokens defined in `index.css`.
 
 | Token          | Dark Mode Value                  | Purpose                  |
 | -------------- | -------------------------------- | ------------------------ |
@@ -328,7 +328,7 @@ Each transaction category has a unique icon and color for instant visual recogni
 | -------------------- | -------------------------------- |
 | **React 19**         | UI framework (functional components + hooks) |
 | **Vite 8**           | Lightning-fast dev server & bundler |
-| **Tailwind CSS v4**  | Utility-first styling with `@theme` tokens |
+| **Pure CSS**         | Styling with custom variables    |
 | **Redux Toolkit**    | Centralized state with `createAsyncThunk` |
 | **React Router v7**  | Client-side routing              |
 | **Recharts**         | Charts & data visualizations     |
@@ -391,7 +391,7 @@ This project is licensed under the **MIT License** — free to use, modify, and 
 
 <div align="center">
 
-**Built with ❤️ using React + Vite + Tailwind CSS**
+**Built with ❤️ using React + Vite + CSS**
 
 ⭐ Star this repo if you found it useful!
 
