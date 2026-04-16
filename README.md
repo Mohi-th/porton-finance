@@ -1,14 +1,13 @@
 <div align="center">
 
-# 💰 FinTrack — Finance Dashboard
+# 💰 Finance Dashboard
 
 **A premium, interactive finance dashboard for tracking income, expenses, and spending insights.**
 
-Built with **React 19 · Vite 8 · Redux Toolkit · Tailwind CSS v4 · Recharts**
+Built with **React 19 · Vite 8 · Redux Toolkit · Recharts**
 
 [![React](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4.0-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Redux](https://img.shields.io/badge/Redux_Toolkit-2.11-764ABC?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org/)
 [![License](https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge)](LICENSE)
 
@@ -110,7 +109,7 @@ Toggle between roles via the **header segmented control**. The current role is d
 
 ### 3. Component Design
 - **Atomic-ish UI**: Components are split into `common` (reusable primitives), `layout` (app shell), and feature-specific folders (dashboard, transactions).
-- **Glassmorphism & Tailwind**: Styles are managed through **Tailwind CSS v4**, utilizing its new `@theme` system for consistent design tokens across light and dark modes.
+- **Glassmorphism & CSS Variables**: Styles are managed through pure CSS with a robust system of custom variables (CSS variables) for consistent design tokens across light and dark modes.
 
 ---
 
@@ -173,57 +172,43 @@ Toggle between roles via the **header segmented control**. The current role is d
 finance-dashboard/
 ├── public/                     # Static assets
 ├── src/
+│   ├── assets/                 # Images & SVG icons
 │   ├── components/
-│   │   ├── charts/             # Recharts visualizations
-│   │   │   ├── BalanceTrendChart.jsx
-│   │   │   ├── MonthlyComparisonChart.jsx
-│   │   │   └── SpendingBreakdownChart.jsx
 │   │   ├── common/             # Reusable UI primitives
-│   │   │   ├── AnimatedNumber.jsx
-│   │   │   ├── Badge.jsx
-│   │   │   ├── Button.jsx
-│   │   │   ├── Card.jsx
-│   │   │   ├── CategoryIcon.jsx    # ← NEW: Lucide icons per category
-│   │   │   ├── EmptyState.jsx
-│   │   │   ├── Modal.jsx
-│   │   │   └── Toast.jsx
+│   │   │   └── ConfirmDialog.jsx
 │   │   ├── dashboard/          # Dashboard-specific widgets
-│   │   │   ├── RecentTransactions.jsx
+│   │   │   ├── ActiveAlerts.jsx
+│   │   │   ├── AIInsightCard.jsx
+│   │   │   ├── RecentActivity.jsx
+│   │   │   ├── SpendingComposition.jsx
 │   │   │   └── SummaryCards.jsx
-│   │   ├── insights/           # Insight cards & breakdowns
-│   │   │   └── InsightCards.jsx
 │   │   ├── layout/             # App shell — Sidebar, Header
-│   │   │   ├── AppLayout.jsx
-│   │   │   ├── Header.jsx      # Role toggle + theme switch
-│   │   │   └── Sidebar.jsx     # Nav + role badge indicator
+│   │   │   ├── Header.jsx      # Theme toggle + notifications
+│   │   │   ├── MobileDock.jsx  # Mobile navigation dock
+│   │   │   └── Sidebar.jsx     # Desktop navigation
 │   │   └── transactions/       # Transaction CRUD UI
-│   │       ├── TransactionFilters.jsx  # Collapsible filters + debounced search
-│   │       ├── TransactionForm.jsx
-│   │       └── TransactionList.jsx
-│   ├── data/
-│   │   └── mockData.js         # Hardcoded realistic transaction data
-│   ├── pages/
-│   │   ├── DashboardPage.jsx
-│   │   ├── TransactionsPage.jsx
-│   │   ├── InsightsPage.jsx
-│   │   └── BudgetPage.jsx
-│   ├── store/
-│   │   ├── index.js            # Redux store configuration
-│   │   └── slices/
-│   │       └── transactionSlice.js   # Async thunks + filters + selectors
-│   ├── services/
-│   │   ├── api.js              # Mock API implementation (localStorage)
-│   │   └── transactionService.js # Service wrapper
+│   │       ├── TransactionModal.jsx
+│   │       └── TransactionTable.jsx # Responsive transaction list
 │   ├── context/
 │   │   └── ThemeContext.jsx    # Theme management via Context API
 │   ├── hooks/
 │   │   ├── useAnalytics.js     # GA4 tracking hook
 │   │   ├── useDebounce.js      # Value debouncing hook
 │   │   └── useLocalStorage.js  # Persistence hook
+│   ├── pages/
+│   │   ├── BudgetPage.jsx
+│   │   ├── DashboardPage.jsx
+│   │   ├── InsightsPage.jsx
+│   │   └── TransactionsPage.jsx
+│   ├── services/
+│   │   └── api.js              # Mock API implementation (localStorage)
+│   ├── store/
+│   │   ├── index.js            # Redux store configuration
+│   │   └── slices/
+│   │       └── transactionSlice.js # Async thunks + filters + selectors
 │   ├── utils/
 │   │   ├── constants.js        # App-wide constants & category maps
-│   │   ├── formatters.js       # Currency (₹ INR), date, ID formatters
-│   │   └── storage.js          # localStorage helpers
+│   │   └── formatters.js       # Currency (₹ INR) & date formatters
 │   ├── App.jsx                 # Root component with routing
 │   ├── index.css               # Tailwind CSS + @theme design tokens
 │   └── main.jsx                # App entry point
